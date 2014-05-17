@@ -1,0 +1,4 @@
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/build/MonoTorrent/Debug/MonoTorrent.dll.mdb
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/build/MonoTorrent/Debug/MonoTorrent.dll
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/src/MonoTorrent/obj/Debug/MonoTorrent.dll
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/src/MonoTorrent/obj/Debug/MonoTorrent.dll.mdb

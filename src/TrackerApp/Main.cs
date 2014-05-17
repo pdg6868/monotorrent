@@ -40,6 +40,8 @@ using TrackerApp;
 using MonoTorrent.TorrentWatcher;
 using MonoTorrent.Tracker.Listeners;
 using MonoTorrent;
+using System.Net;
+using System.Net.Sockets;
 
 namespace SampleTracker
 {
@@ -100,9 +102,21 @@ namespace SampleTracker
         ///<summary>Start the Tracker. Start Watching the TORRENT_DIR Directory for new Torrents.</summary>
         public MySimpleTracker()
         {
-            System.Net.IPEndPoint listenpoint = new System.Net.IPEndPoint(System.Net.IPAddress.Loopback, 10000);
+            var hostname = Dns.GetHostName();
+            IPAddress[] localIps = Dns.GetHostAddresses(hostname);
+            IPAddress localIp = null;
+            foreach (IPAddress address in localIps)
+            {
+                if (address.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    localIp = address;
+                    break;
+                }
+            }
+
+            System.Net.IPEndPoint listenpoint = new System.Net.IPEndPoint(localIp, 10000);
             Console.WriteLine("Listening at: {0}", listenpoint);
-            ListenerBase listener = new HttpListener(listenpoint);
+            ListenerBase listener = new MonoTorrent.Tracker.Listeners.HttpListener(listenpoint);
             tracker = new Tracker();
             tracker.AllowUnregisteredTorrents = true;
             tracker.RegisterListener(listener);

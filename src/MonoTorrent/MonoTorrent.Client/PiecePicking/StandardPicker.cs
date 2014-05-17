@@ -305,6 +305,9 @@ namespace MonoTorrent.Client
                 {
                     p.Blocks[j].Requested = true;
                     bundle.Messages.Add(p.Blocks[j].CreateRequest(id));
+                    /*
+                        
+                     */
                 }
             }
             return bundle;

@@ -1,0 +1,4 @@
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/build/Samples/Debug/SampleClient.exe.mdb
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/build/Samples/Debug/SampleClient.exe
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/src/SampleClient/obj/Debug/SampleClient.exe
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/src/SampleClient/obj/Debug/SampleClient.exe.mdb

@@ -155,6 +155,8 @@ namespace MonoTorrent.Client
             Requested = true;
             RequestedOff = id;
             RequestedOff.AmRequestingPiecesCount++;
+
+
             return new RequestMessage(PieceIndex, this.startOffset, this.requestLength);
         }
 

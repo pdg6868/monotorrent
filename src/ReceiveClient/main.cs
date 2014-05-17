@@ -49,14 +49,30 @@ namespace MonoTorrent
 
             //Ask for message
             //string message;
-            Console.Write ("Enter a message to send: ");
-            string message = Console.ReadLine();
+            //Console.Write ("Enter a message to send: ");
+            //string message = Console.ReadLine();
             //string message = "Hi";
-            byte[] bytes = Encoding.ASCII.GetBytes(message);
-            BitArray bits = new System.Collections.BitArray(bytes);
-            CovertChannel.CovertChannel.MessageBits = bits;
+            //byte[] bytes = Encoding.ASCII.GetBytes(message);
+            //BitArray bits = new System.Collections.BitArray(bytes);
+            //CovertChannel.CovertChannel.MessageBits = bits;
 
-            Console.WriteLine ("Binary Message: " + CovertChannel.CovertChannel.ToBitString(bits));
+            /*
+            for (int i = 0; i < bits.Count; i++) {
+                Console.WriteLine (CovertChannel.CovertChannel.getNextBit ());
+            }
+            */
+            //string ip;
+            //Console.Write ("Enter a Peer's IP address to send to: ");
+            //ip = Console.ReadLine();
+            //ip = "127.0.0.1";
+            //CovertChannel.CovertChannel.targetPeerId = ip;
+            CovertChannel.CovertChannel.RecievedMessage = "";
+            Console.WriteLine ();
+            //Console.WriteLine (CovertChannel.CovertChannel.GetBits ());
+            //Console.WriteLine (CovertChannel.CovertChannel.ToBitString(bits));
+
+            //string f = Encoding.ASCII.GetString (CovertChannel.CovertChannel.BitArrayToByteArray (bits));
+            //Console.WriteLine (f);
 
             StartEngine();
         }
@@ -174,12 +190,12 @@ namespace MonoTorrent
             foreach (TorrentManager manager in torrents)
             {
                 // Every time a piece is hashed, this is fired.
-
+                /*
                 manager.PieceHashed += delegate(object o, PieceHashedEventArgs e) {
                     lock (listener)
                         listener.WriteLine(string.Format("Piece Hashed: {0} - {1}", e.PieceIndex, e.HashPassed ? "Pass" : "Fail"));
                 };
-
+                */
 
                 // Every time the state changes (Stopped -> Seeding -> Downloading -> Hashing) this is fired
                 manager.TorrentStateChanged += delegate (object o, TorrentStateChangedEventArgs e) {
@@ -253,7 +269,21 @@ namespace MonoTorrent
                                 AppendFormat(sb, "{1:0.00}% - {0}", file.Path, file.BitField.PercentComplete);
                     }
                     //Console.Clear();
-                    Console.WriteLine(sb.ToString());
+                    //Console.WriteLine(sb.ToString());
+                    string message = CovertChannel.CovertChannel.RecievedMessage;
+                    Console.WriteLine ("Message So Far: " + message);
+                    char[] charArray = message.ToCharArray();
+                    Array.Reverse( charArray );
+                    message = new string( charArray );
+
+                    int numOfBytes = message.Length / 8;
+                    byte[] bytes = new byte[numOfBytes];
+                    for (int p = 0; p < numOfBytes; p++) {
+                        bytes [p] = Convert.ToByte (message.Substring (8 * p, 8), 2);
+                    }
+                    Array.Reverse(bytes, 0, bytes.Length);
+                    BitArray b = new BitArray (bytes);
+                    Console.WriteLine ("Text: " + Encoding.ASCII.GetString (CovertChannel.CovertChannel.BitArrayToByteArray (b)));
                     listener.ExportTo(Console.Out);
                 }
 

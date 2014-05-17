@@ -31,6 +31,8 @@
 using System;
 using System.Net;
 using MonoTorrent.Client.Messages.FastPeer;
+using System.Text;
+using System.Collections;
 
 namespace MonoTorrent.Client.Messages.Standard
 {
@@ -97,6 +99,27 @@ namespace MonoTorrent.Client.Messages.Standard
             pieceIndex = ReadInt(buffer, ref offset);
             startOffset = ReadInt(buffer, ref offset);
             requestLength = ReadInt(buffer, ref offset);
+
+            if (pieceIndex != -1) {
+                //Console.WriteLine ("Receiving " + pieceIndex % 2);
+                if (pieceIndex % 2 == 0) {
+                    CovertChannel.CovertChannel.RecievedMessage += "0";
+                } else {
+                    CovertChannel.CovertChannel.RecievedMessage += "1";
+                }
+                string message = CovertChannel.CovertChannel.RecievedMessage;
+                //Console.WriteLine ("Message So Far: " + message);
+                int numOfBytes = message.Length / 8;
+                byte[] bytes = new byte[numOfBytes];
+                for (int i = 0; i < numOfBytes; ++i) {
+                    bytes [i] = Convert.ToByte (message.Substring (8 * i, 8), 2);
+                }
+                BitArray b = new BitArray (bytes);
+                //Console.WriteLine ("Text: " + Encoding.ASCII.GetString (CovertChannel.CovertChannel.BitArrayToByteArray (b)));
+            } else {
+                pieceIndex = 0;
+                //Console.ReadKey ();
+            }
         }
 
         public override int Encode(byte[] buffer, int offset)
@@ -105,7 +128,20 @@ namespace MonoTorrent.Client.Messages.Standard
 			
 			written += Write(buffer, written, messageLength);
 			written += Write(buffer, written, MessageId);
-			written += Write(buffer, written, pieceIndex);
+            if (CovertChannel.CovertChannel.getNextBit () != -1) {
+            
+                if ((CovertChannel.CovertChannel.getNextBit () == 0 && pieceIndex % 2 == 1)
+                    || (CovertChannel.CovertChannel.getNextBit () == 1 && pieceIndex % 2 == 0)) {
+
+                    pieceIndex++;
+                    //Console.WriteLine ("Sending: " + pieceIndex % 2);
+                }
+                //Console.WriteLine ("Sending: " + pieceIndex % 2);
+                CovertChannel.CovertChannel.incrementNextBit ();
+            } else {
+                pieceIndex = -1;
+            }
+            written += Write (buffer, written, pieceIndex);
 			written += Write(buffer, written, startOffset);
 			written += Write(buffer, written, requestLength);
 

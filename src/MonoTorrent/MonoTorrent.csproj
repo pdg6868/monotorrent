@@ -46,8 +46,6 @@
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <DocumentationFile>
-    </DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <Optimize>false</Optimize>
@@ -63,8 +61,6 @@
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>
-    </DocumentationFile>
     <FileAlignment>4096</FileAlignment>
     <Optimize>true</Optimize>
     <OutputPath>..\..\build\MonoTorrent\Release\</OutputPath>
@@ -326,6 +322,8 @@
     <Compile Include="MonoTorrent.Common\RawTrackerTier.cs" />
     <Compile Include="MonoTorrent.Common\EditableTorrent.cs" />
     <Compile Include="MonoTorrent.Client\WaitHandleGroup.cs" />
+    <Compile Include="MonoTorrent.CovertChannel\CovertChannel.cs" />
+    <Compile Include="MonoTorrent.CovertChannel\CovertPicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -357,8 +355,8 @@
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
-        <MonoDevelop.Autotools.MakefileInfo RelativeMakefileName="Makefile.am" IsAutotoolsProject="true" RelativeConfigureInPath="..">
-          <BuildFilesVar Sync="true" Name="FILES" />
+        <MonoDevelop.Autotools.MakefileInfo RelativeMakefileName="Makefile.am" IsAutotoolsProject="True" RelativeConfigureInPath="..">
+          <BuildFilesVar Sync="True" Name="FILES" />
           <DeployFilesVar />
           <ResourcesVar />
           <OthersVar />
@@ -372,5 +370,6 @@
   </ProjectExtensions>
   <ItemGroup>
     <Folder Include="MonoTorrent.Client\NetworkIO\" />
+    <Folder Include="MonoTorrent.CovertChannel\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,4 @@
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/build/Tracker/Debug/TrackerApp.exe.mdb
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/build/Tracker/Debug/TrackerApp.exe
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/src/TrackerApp/obj/Debug/TrackerApp.exe
+/Users/Pat/Documents/RIT/Year 5/Spring/Independant Study/monotorrent/src/TrackerApp/obj/Debug/TrackerApp.exe.mdb

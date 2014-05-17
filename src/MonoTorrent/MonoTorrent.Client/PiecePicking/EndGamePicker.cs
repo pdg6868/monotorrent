@@ -142,6 +142,7 @@ namespace MonoTorrent.Client
                 {
                     if (p.Blocks[i].Requested)
                         continue;
+
                     p.Blocks[i].Requested = true;
                     Request request = new Request(id, p.Blocks[i]);
                     requests.Add(request);
