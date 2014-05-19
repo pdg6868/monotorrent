@@ -14,8 +14,10 @@ using MonoTorrent.Client.Tracker;
 using MonoTorrent.Dht;
 using MonoTorrent.Dht.Listeners;
 using System.Collections;
+using MonoTorrent;
+using MonoTorrent.CovertChannel;
 
-namespace MonoTorrent
+namespace ReceiveClient
 {
     class main
     {
@@ -47,7 +49,7 @@ namespace MonoTorrent
             Thread.GetDomain().UnhandledException += delegate(object sender, UnhandledExceptionEventArgs e) { Console.WriteLine(e.ExceptionObject); shutdown(); };
 
 
-            CovertChannel.CovertChannel.ReceivedMessage = "";
+            CovertChannel.ReceivedMessage = "";
             Console.WriteLine ();
 
 
@@ -143,7 +145,7 @@ namespace MonoTorrent
                     // which you then register with the engine.
                     TorrentManager manager = new TorrentManager(torrent, downloadsPath, torrentDefaults);
                     if (fastResume.ContainsKey(torrent.InfoHash.ToHex ()))
-                        manager.LoadFastResume(new FastResume ((BEncodedDictionary)fastResume[torrent.infoHash.ToHex ()]));
+                        manager.LoadFastResume(new FastResume ((BEncodedDictionary)fastResume[torrent.InfoHash.ToHex ()]));
                     engine.Register(manager);
 
                     // Store the torrent manager in our list so we can access it later
@@ -247,10 +249,10 @@ namespace MonoTorrent
                     }
                     //Console.Clear();
                     //Console.WriteLine(sb.ToString());
-                    string message = CovertChannel.CovertChannel.ReceivedMessage;
+                    string message = CovertChannel.ReceivedMessage;
                     Console.WriteLine ("Message So Far: " + message);
 
-                    Console.WriteLine("Text: " + CovertChannel.CovertChannel.DecodeMessage());
+                    Console.WriteLine("Text: " + CovertChannel.DecodeMessage());
                     listener.ExportTo(Console.Out);
                 }
 

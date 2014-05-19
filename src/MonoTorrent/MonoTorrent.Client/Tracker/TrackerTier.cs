@@ -31,7 +31,7 @@ namespace MonoTorrent.Client.Tracker
             set { this.sentStartedEvent = value; }
         }
 
-        internal List<Tracker> Trackers
+        public List<Tracker> Trackers
         {
             get { return this.trackers; }
         }

@@ -227,7 +227,7 @@ namespace MonoTorrent.Client
                 picker.Reset();
         }
 
-        internal int CurrentRequestCount()
+        public int CurrentRequestCount()
         {
             return (int)ClientEngine.MainLoop.QueueWait((MainLoopJob) delegate { return Picker.CurrentRequestCount(); });
         }

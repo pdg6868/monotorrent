@@ -14,8 +14,10 @@ using MonoTorrent.Client.Tracker;
 using MonoTorrent.Dht;
 using MonoTorrent.Dht.Listeners;
 using System.Collections;
+using MonoTorrent;
+using MonoTorrent.CovertChannel;
 
-namespace MonoTorrent
+namespace MonoTorrentClient
 {
     class main
     {
@@ -52,7 +54,7 @@ namespace MonoTorrent
             Console.Write ("Enter a message to send: ");
             string message = Console.ReadLine();
 
-            Console.WriteLine("Binary Message: " + CovertChannel.CovertChannel.EncodeMessage(message));
+            Console.WriteLine("Binary Message: " + CovertChannel.EncodeMessage(message));
 
             StartEngine();
         }
@@ -146,7 +148,7 @@ namespace MonoTorrent
                     // which you then register with the engine.
                     TorrentManager manager = new TorrentManager(torrent, downloadsPath, torrentDefaults);
                     if (fastResume.ContainsKey(torrent.InfoHash.ToHex ()))
-                        manager.LoadFastResume(new FastResume ((BEncodedDictionary)fastResume[torrent.infoHash.ToHex ()]));
+                        manager.LoadFastResume(new FastResume ((BEncodedDictionary)fastResume[torrent.InfoHash.ToHex ()]));
                     engine.Register(manager);
 
                     // Store the torrent manager in our list so we can access it later
