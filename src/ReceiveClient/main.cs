@@ -49,7 +49,7 @@ namespace ReceiveClient
             Thread.GetDomain().UnhandledException += delegate(object sender, UnhandledExceptionEventArgs e) { Console.WriteLine(e.ExceptionObject); shutdown(); };
 
 
-            CovertChannel.ReceivedMessage = "0001001010010110";
+            CovertChannel.ReceivedMessage = "";
             Console.WriteLine ();
 
 
