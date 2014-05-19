@@ -108,7 +108,6 @@ namespace MonoTorrent.Client.Messages.Standard
                     CovertChannel.CovertChannel.SentDone = true;
                 }
 
-                //Console.WriteLine ("Receiving " + pieceIndex % 2);
                 if (pieceIndex % 2 == 0)
                 {
                     CovertChannel.CovertChannel.ReceivedMessage += "0";
@@ -127,25 +126,24 @@ namespace MonoTorrent.Client.Messages.Standard
 			
 			written += Write(buffer, written, messageLength);
 			written += Write(buffer, written, MessageId);
-            if (CovertChannel.CovertChannel.getNextBit() != -1)
-            {
-            
-                if ((CovertChannel.CovertChannel.getNextBit () == 0 && pieceIndex % 2 == 1)
-                    || (CovertChannel.CovertChannel.getNextBit () == 1 && pieceIndex % 2 == 0)) {
 
-                    pieceIndex++;
-                    //Console.WriteLine ("Sending: " + pieceIndex % 2);
-                }
-                //Console.WriteLine ("Sending: " + pieceIndex % 2);
-                CovertChannel.CovertChannel.incrementNextBit ();
-            }
-            else if (CovertChannel.CovertChannel.SentDone)
+            if (!CovertChannel.CovertChannel.SentDone)
             {
-                //do nothing
-            }
-            else {
-                pieceIndex = -1;
-                CovertChannel.CovertChannel.SentDone = true;
+                if (CovertChannel.CovertChannel.getNextBit() != -1)
+                {
+
+                    if ((CovertChannel.CovertChannel.getNextBit() == 0 && pieceIndex % 2 == 1)
+                        || (CovertChannel.CovertChannel.getNextBit() == 1 && pieceIndex % 2 == 0))
+                    {
+                        pieceIndex++;
+                    }
+                    CovertChannel.CovertChannel.incrementNextBit();
+                }
+                else
+                {
+                    pieceIndex = -1;
+                    CovertChannel.CovertChannel.SentDone = true;
+                }
             }
             written += Write (buffer, written, pieceIndex);
 			written += Write(buffer, written, startOffset);

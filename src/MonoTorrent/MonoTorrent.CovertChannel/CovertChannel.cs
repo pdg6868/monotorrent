@@ -79,9 +79,8 @@ namespace MonoTorrent.CovertChannel
                 bytes[p] = Convert.ToByte(message.Substring(8 * p, 8), 2);
             }
             Array.Reverse(bytes, 0, bytes.Length);
-            BitArray b = new BitArray(bytes);
 
-            return Encoding.ASCII.GetString(BitArrayToByteArray(b));
+            return Encoding.ASCII.GetString(bytes);
 
         }
     }
