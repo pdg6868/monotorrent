@@ -51,12 +51,8 @@ namespace MonoTorrent
             //string message;
             Console.Write ("Enter a message to send: ");
             string message = Console.ReadLine();
-            //string message = "Hi";
-            byte[] bytes = Encoding.ASCII.GetBytes(message);
-            BitArray bits = new System.Collections.BitArray(bytes);
-            CovertChannel.CovertChannel.MessageBits = bits;
 
-            Console.WriteLine ("Binary Message: " + CovertChannel.CovertChannel.ToBitString(bits));
+            Console.WriteLine("Binary Message: " + CovertChannel.CovertChannel.EncodeMessage(message));
 
             StartEngine();
         }

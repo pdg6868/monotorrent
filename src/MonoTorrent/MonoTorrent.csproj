@@ -323,7 +323,6 @@
     <Compile Include="MonoTorrent.Common\EditableTorrent.cs" />
     <Compile Include="MonoTorrent.Client\WaitHandleGroup.cs" />
     <Compile Include="MonoTorrent.CovertChannel\CovertChannel.cs" />
-    <Compile Include="MonoTorrent.CovertChannel\CovertPicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -368,8 +367,5 @@
     </MonoDevelop>
     <VisualStudio />
   </ProjectExtensions>
-  <ItemGroup>
-    <Folder Include="MonoTorrent.Client\NetworkIO\" />
-    <Folder Include="MonoTorrent.CovertChannel\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
